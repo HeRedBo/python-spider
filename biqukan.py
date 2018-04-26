@@ -47,7 +47,7 @@ class BiqukanSpider(object):
 
     def writer(self, name, path, text):
         """
-        将爬取道德文章内容写入文件中
+        将爬取到的文章内容写入文件中
         :param name:string 文章章节名称
         :param path: string 小说保存名称
         :param text:string 章节内容

@@ -17,23 +17,27 @@ class PhotoSpider(object):
         """
         req = requests.get(url=self.target, headers=self.headers, verify=False)
         html = json.loads(req.text)
-        print(html)
+
         next_page = html['next_page']
         for each in html['photos']:
             self.photos_id.append(each['id'])
-        time.sleep(1)
-        for i in range(5):
-            req = requests.get(url=next_page, headers=self.headers, verify= False)
+
+        print(next_page)
+        time.sleep(2)
+        for i in range(2):
+            req = requests.get(url=next_page, headers=self.headers, verify=False)
             html = json.loads(req.text)
+            print('html')
+            print(html)
             next_page = html['next_page']
             for each in html['photos']:
                 self.photos_id.append(each['id'])
             time.sleep(1)
 
     def download(self, photo_id, file_name):
-        header = {'user-agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.3'}
+        headers = {'User-Agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.3'}
         target = self.download_server.replace('xxx', photo_id)
-        with closing(requests.get(url=target, stream=True, verify=False, header=self.headers)) as r:
+        with closing(requests.get(url=target, stream=True, verify=False, headers=self.headers)) as r:
             with open("&d.jpg" % file_name, 'ab+') as f:
                 for chunk in r.iter_content(chunk_size=1024):
                     if chunk:
