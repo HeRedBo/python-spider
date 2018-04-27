@@ -18,7 +18,7 @@ class ShuaiaSpider(object):
         self.list_url = []
         self.spider_page_count = 2  # 抓取的页面数量
         self.encoding = 'utf-8'
-        self.image_dir = 'shuaa_images'
+        self.image_dir = 'shuaia_images'
 
     def run(self):
         self.__say_hello()
